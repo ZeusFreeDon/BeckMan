@@ -51,14 +51,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeckManDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeckManDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeckManDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeckManDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeckManDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="BeckManDBContext.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="bec_Aear.cs">
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bec_AssInformation.cs">
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bec_Partion.cs">
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bec_Product.cs">
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bes_user.cs">
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="BeckManDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BeckManDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BeckManDB.edmx.diagram">
+      <DependentUpon>BeckManDB.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BeckManDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BeckManDB.edmx</DependentUpon>
+      <LastGenOutput>BeckManDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BeckManDB.edmx.sql" />
+    <Content Include="BeckManDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BeckManDB.edmx</DependentUpon>
+      <LastGenOutput>BeckManDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

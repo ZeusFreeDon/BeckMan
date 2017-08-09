@@ -4,7 +4,9 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{2B2F622C-7785-48CD-B554-0BB5210329E7}" Name="BeckMan" Selected="Yes" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="BeckMan.cdm"/>
+		<Model Expanded="Yes" ID="{2B2F622C-7785-48CD-B554-0BB5210329E7}" Loaded="No" Name="BeckMan" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="BeckMan.cdm"/>
+		<Model Expanded="Yes" ID="{2B2F622C-7785-48CD-B554-0BB5210329E7}" Name="BeckMan" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="BeckMan.cdm"/>
+		<Model ID="{F7D5BFD8-B137-40C8-9C5E-0C346308ED15}" Name="BeckMan" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="BeckMan.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>

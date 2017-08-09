@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7BDBA68F-0
 		规范说明.txt = 规范说明.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeckMan.Business", "BeckMan.Business\BeckMan.Business.csproj", "{3689E0E2-D036-4966-ADDB-1247AA5CED9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{081E40D2-4760-4A95-9CA6-AD60BBD9A461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{081E40D2-4760-4A95-9CA6-AD60BBD9A461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{081E40D2-4760-4A95-9CA6-AD60BBD9A461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3689E0E2-D036-4966-ADDB-1247AA5CED9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3689E0E2-D036-4966-ADDB-1247AA5CED9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3689E0E2-D036-4966-ADDB-1247AA5CED9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3689E0E2-D036-4966-ADDB-1247AA5CED9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{13DC6C99-D866-4988-A6D0-0CD50BF8D628} = {13F4DBC0-F3A2-4006-9401-654CFBB9A7E1}
 		{081E40D2-4760-4A95-9CA6-AD60BBD9A461} = {66D9466D-BEE1-48B8-9C8F-0E33208809DB}
+		{3689E0E2-D036-4966-ADDB-1247AA5CED9C} = {66D9466D-BEE1-48B8-9C8F-0E33208809DB}
 	EndGlobalSection
 EndGlobal

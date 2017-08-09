@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BeckMan.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BeckManStoreContainer">
+    <EntitySet Name="bes_userSet" EntityType="BeckMan.Store.bes_userSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_AearSet" EntityType="BeckMan.Store.bec_AearSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_ProductSet" EntityType="BeckMan.Store.bec_ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_PartionSet" EntityType="BeckMan.Store.bec_PartionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_AssInformationSet" EntityType="BeckMan.Store.bec_AssInformationSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="bes_userbec_Partion" Association="BeckMan.Store.bes_userbec_Partion">
+      <End Role="bes_user" EntitySet="bes_userSet" />
+      <End Role="bec_Partion" EntitySet="bec_PartionSet" />
+    </AssociationSet>
+    <AssociationSet Name="bec_Partionbec_AssInformation" Association="BeckMan.Store.bec_Partionbec_AssInformation">
+      <End Role="bec_Partion" EntitySet="bec_PartionSet" />
+      <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
+    </AssociationSet>
+    <AssociationSet Name="bec_Aearbec_AssInformation" Association="BeckMan.Store.bec_Aearbec_AssInformation">
+      <End Role="bec_Aear" EntitySet="bec_AearSet" />
+      <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="bes_userSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDistributor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Activity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_AearSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remak" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_ProductSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SequeNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_PartionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartionID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PartionName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="bes_user_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_AssInformationSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYTotal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYSales" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYApplication" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYCallCenter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYOperation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SalesState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AppState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CallCenterState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OperationState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYTotal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYSales" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYApplication" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYCallCenter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYOperation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="bec_Partion_Id" Type="int" Nullable="false" />
+    <Property Name="bec_Aear_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="bes_userbec_Partion">
+    <End Role="bes_user" Type="BeckMan.Store.bes_userSet" Multiplicity="1" />
+    <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bes_user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bec_Partion">
+        <PropertyRef Name="bes_user_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bec_Partionbec_AssInformation">
+    <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="1" />
+    <End Role="bec_AssInformation" Type="BeckMan.Store.bec_AssInformationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bec_Partion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bec_AssInformation">
+        <PropertyRef Name="bec_Partion_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bec_Aearbec_AssInformation">
+    <End Role="bec_Aear" Type="BeckMan.Store.bec_AearSet" Multiplicity="1" />
+    <End Role="bec_AssInformation" Type="BeckMan.Store.bec_AssInformationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bec_Aear">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bec_AssInformation">
+        <PropertyRef Name="bec_Aear_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BeckMan" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BeckManEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="bes_userSet" EntityType="BeckMan.bes_user" />
+          <EntitySet Name="bec_AearSet" EntityType="BeckMan.bec_Aear" />
+          <EntitySet Name="bec_ProductSet" EntityType="BeckMan.bec_Product" />
+          <EntitySet Name="bec_PartionSet" EntityType="BeckMan.bec_Partion" />
+          <EntitySet Name="bec_AssInformationSet" EntityType="BeckMan.bec_AssInformation" />
+          <AssociationSet Name="bes_userbec_Partion" Association="BeckMan.bes_userbec_Partion">
+            <End Role="bes_user" EntitySet="bes_userSet" />
+            <End Role="bec_Partion" EntitySet="bec_PartionSet" />
+          </AssociationSet>
+          <AssociationSet Name="bec_Partionbec_AssInformation" Association="BeckMan.bec_Partionbec_AssInformation">
+            <End Role="bec_Partion" EntitySet="bec_PartionSet" />
+            <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
+          </AssociationSet>
+          <AssociationSet Name="bec_Aearbec_AssInformation" Association="BeckMan.bec_Aearbec_AssInformation">
+            <End Role="bec_Aear" EntitySet="bec_AearSet" />
+            <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="bes_user">
+          <Documentation>
+            <LongDescription>用户信息</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserNo" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>用户编号</Summary>
+              <LongDescription>用户编号</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="UserName" Type="String" Nullable="false" >
+            <Documentation>
+              <LongDescription>用户名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="RoleType" Type="String" Nullable="false" />
+          <Property Name="IsDistributor" Type="String" Nullable="false" />
+          <Property Name="Activity" Type="String" Nullable="false" />
+          <NavigationProperty Name="bec_Partion" Relationship="BeckMan.bes_userbec_Partion" FromRole="bes_user" ToRole="bec_Partion" />
+          <Property Name="UserCode" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bec_Aear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Remak" Type="String" Nullable="false" />
+          <NavigationProperty Name="bec_AssInformation" Relationship="BeckMan.bec_Aearbec_AssInformation" FromRole="bec_Aear" ToRole="bec_AssInformation" />
+        </EntityType>
+        <EntityType Name="bec_Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SequeNo" Type="String" Nullable="false" />
+          <Property Name="Year" Type="String" Nullable="false" />
+          <Property Name="PName" Type="String" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bec_Partion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartionID" Type="String" Nullable="false" />
+          <Property Name="PartionName" Type="String" Nullable="false" />
+          <NavigationProperty Name="bes_user" Relationship="BeckMan.bes_userbec_Partion" FromRole="bec_Partion" ToRole="bes_user" />
+          <NavigationProperty Name="bec_AssInformation" Relationship="BeckMan.bec_Partionbec_AssInformation" FromRole="bec_Partion" ToRole="bec_AssInformation" />
+        </EntityType>
+        <EntityType Name="bec_AssInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" />
+          <Property Name="DisNo" Type="String" Nullable="false" />
+          <Property Name="DisName" Type="String" Nullable="false" />
+          <Property Name="MYTotal" Type="String" Nullable="false" />
+          <Property Name="MYSales" Type="String" Nullable="false" />
+          <Property Name="MYApplication" Type="String" Nullable="false" />
+          <Property Name="MYCallCenter" Type="String" Nullable="false" />
+          <Property Name="MYOperation" Type="String" Nullable="false" />
+          <Property Name="SalesState" Type="String" Nullable="false" />
+          <Property Name="AppState" Type="String" Nullable="false" />
+          <Property Name="CallCenterState" Type="String" Nullable="false" />
+          <Property Name="OperationState" Type="String" Nullable="false" />
+          <Property Name="AYTotal" Type="String" Nullable="false" />
+          <Property Name="AYSales" Type="String" Nullable="false" />
+          <Property Name="AYApplication" Type="String" Nullable="false" />
+          <Property Name="AYCallCenter" Type="String" Nullable="false" />
+          <Property Name="AYOperation" Type="String" Nullable="false" />
+          <NavigationProperty Name="bec_Partion" Relationship="BeckMan.bec_Partionbec_AssInformation" FromRole="bec_AssInformation" ToRole="bec_Partion" />
+          <NavigationProperty Name="bec_Aear" Relationship="BeckMan.bec_Aearbec_AssInformation" FromRole="bec_AssInformation" ToRole="bec_Aear" />
+        </EntityType>
+        <Association Name="bes_userbec_Partion">
+          <End Type="BeckMan.bes_user" Role="bes_user" Multiplicity="1" />
+          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="*" />
+        </Association>
+        <Association Name="bec_Partionbec_AssInformation">
+          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="1" />
+          <End Type="BeckMan.bec_AssInformation" Role="bec_AssInformation" Multiplicity="*" />
+        </Association>
+        <Association Name="bec_Aearbec_AssInformation">
+          <End Type="BeckMan.bec_Aear" Role="bec_Aear" Multiplicity="1" />
+          <End Type="BeckMan.bec_AssInformation" Role="bec_AssInformation" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BeckManStoreContainer" CdmEntityContainer="BeckManEntities">
+    <EntitySetMapping Name="bes_userSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bes_user)">
+        <MappingFragment StoreEntitySet="bes_userSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+          <ScalarProperty Name="IsDistributor" ColumnName="IsDistributor" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bec_AearSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Aear)">
+        <MappingFragment StoreEntitySet="bec_AearSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remak" ColumnName="Remak" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bec_ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Product)">
+        <MappingFragment StoreEntitySet="bec_ProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SequeNo" ColumnName="SequeNo" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bec_PartionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Partion)">
+        <MappingFragment StoreEntitySet="bec_PartionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PartionID" ColumnName="PartionID" />
+          <ScalarProperty Name="PartionName" ColumnName="PartionName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bec_AssInformationSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_AssInformation)">
+        <MappingFragment StoreEntitySet="bec_AssInformationSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="DisNo" ColumnName="DisNo" />
+          <ScalarProperty Name="DisName" ColumnName="DisName" />
+          <ScalarProperty Name="MYTotal" ColumnName="MYTotal" />
+          <ScalarProperty Name="MYSales" ColumnName="MYSales" />
+          <ScalarProperty Name="MYApplication" ColumnName="MYApplication" />
+          <ScalarProperty Name="MYCallCenter" ColumnName="MYCallCenter" />
+          <ScalarProperty Name="MYOperation" ColumnName="MYOperation" />
+          <ScalarProperty Name="SalesState" ColumnName="SalesState" />
+          <ScalarProperty Name="AppState" ColumnName="AppState" />
+          <ScalarProperty Name="CallCenterState" ColumnName="CallCenterState" />
+          <ScalarProperty Name="OperationState" ColumnName="OperationState" />
+          <ScalarProperty Name="AYTotal" ColumnName="AYTotal" />
+          <ScalarProperty Name="AYSales" ColumnName="AYSales" />
+          <ScalarProperty Name="AYApplication" ColumnName="AYApplication" />
+          <ScalarProperty Name="AYCallCenter" ColumnName="AYCallCenter" />
+          <ScalarProperty Name="AYOperation" ColumnName="AYOperation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="bes_userbec_Partion" TypeName="BeckMan.bes_userbec_Partion" StoreEntitySet="bec_PartionSet">
+      <EndProperty Name="bes_user">
+        <ScalarProperty Name="Id" ColumnName="bes_user_Id" />
+      </EndProperty>
+      <EndProperty Name="bec_Partion">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="bec_Partionbec_AssInformation" TypeName="BeckMan.bec_Partionbec_AssInformation" StoreEntitySet="bec_AssInformationSet">
+      <EndProperty Name="bec_Partion">
+        <ScalarProperty Name="Id" ColumnName="bec_Partion_Id" />
+      </EndProperty>
+      <EndProperty Name="bec_AssInformation">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="bec_Aearbec_AssInformation" TypeName="BeckMan.bec_Aearbec_AssInformation" StoreEntitySet="bec_AssInformationSet">
+      <EndProperty Name="bec_Aear">
+        <ScalarProperty Name="Id" ColumnName="bec_Aear_Id" />
+      </EndProperty>
+      <EndProperty Name="bec_AssInformation">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
