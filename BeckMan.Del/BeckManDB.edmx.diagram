@@ -13,6 +13,7 @@
         <AssociationConnector Association="BeckMan.bes_userbec_Partion" />
         <AssociationConnector Association="BeckMan.bec_Partionbec_AssInformation" />
         <AssociationConnector Association="BeckMan.bec_Aearbec_AssInformation" />
+        <EntityTypeShape EntityType="BeckMan.bec_Role" Width="1.5" PointX="0.875" PointY="2.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

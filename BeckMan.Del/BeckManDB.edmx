@@ -147,6 +147,7 @@
             <End Role="bec_Aear" EntitySet="bec_AearSet" />
             <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
           </AssociationSet>
+          <EntitySet Name="bec_RoleSet" EntityType="BeckMan.bec_Role" />
         </EntityContainer>
         <EntityType Name="bes_user">
           <Documentation>
@@ -240,6 +241,15 @@
           <End Type="BeckMan.bec_Aear" Role="bec_Aear" Multiplicity="1" />
           <End Type="BeckMan.bec_AssInformation" Role="bec_AssInformation" Multiplicity="*" />
         </Association>
+        <EntityType Name="bec_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RName" Type="String" Nullable="false" />
+          <Property Name="ShotName" Type="String" Nullable="false" />
+          <Property Name="Remak" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

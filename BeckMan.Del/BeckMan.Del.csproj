@@ -79,6 +79,9 @@
     <Compile Include="bec_Product.cs">
       <DependentUpon>BeckManDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="bec_Role.cs">
+      <DependentUpon>BeckManDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="bes_user.cs">
       <DependentUpon>BeckManDB.tt</DependentUpon>
     </Compile>
