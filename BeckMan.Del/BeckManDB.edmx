@@ -4,138 +4,138 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BeckMan.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="bec_AearSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remak" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="bec_AssInformationSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DisNo" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DisName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MYTotal" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MYSales" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MYApplication" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MYCallCenter" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MYOperation" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SalesState" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AppState" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CallCenterState" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="OperationState" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AYTotal" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AYSales" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AYApplication" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AYCallCenter" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AYOperation" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="bec_Partion_Id" Type="int" Nullable="false" />
-          <Property Name="bec_Aear_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="bec_PartionSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PartionID" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PartionName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="bes_user_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="bec_ProductSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SequeNo" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="bec_RoleSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ShortName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="bes_userSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserNo" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="RoleType" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IsDistributor" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Activity" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserCode" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_bec_Aearbec_AssInformation">
-          <End Role="bec_AearSet" Type="Self.bec_AearSet" Multiplicity="1" />
-          <End Role="bec_AssInformationSet" Type="Self.bec_AssInformationSet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bec_AearSet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="bec_AssInformationSet">
-              <PropertyRef Name="bec_Aear_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_bec_Partionbec_AssInformation">
-          <End Role="bec_PartionSet" Type="Self.bec_PartionSet" Multiplicity="1" />
-          <End Role="bec_AssInformationSet" Type="Self.bec_AssInformationSet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bec_PartionSet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="bec_AssInformationSet">
-              <PropertyRef Name="bec_Partion_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_bes_userbec_Partion">
-          <End Role="bes_userSet" Type="Self.bes_userSet" Multiplicity="1" />
-          <End Role="bec_PartionSet" Type="Self.bec_PartionSet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bes_userSet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="bec_PartionSet">
-              <PropertyRef Name="bes_user_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="BeckManStoreContainer">
-          <EntitySet Name="bec_AearSet" EntityType="Self.bec_AearSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bec_AssInformationSet" EntityType="Self.bec_AssInformationSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bec_PartionSet" EntityType="Self.bec_PartionSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bec_ProductSet" EntityType="Self.bec_ProductSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bec_RoleSet" EntityType="Self.bec_RoleSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bes_userSet" EntityType="Self.bes_userSet" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_bec_Aearbec_AssInformation" Association="Self.FK_bec_Aearbec_AssInformation">
-            <End Role="bec_AearSet" EntitySet="bec_AearSet" />
-            <End Role="bec_AssInformationSet" EntitySet="bec_AssInformationSet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_bec_Partionbec_AssInformation" Association="Self.FK_bec_Partionbec_AssInformation">
-            <End Role="bec_PartionSet" EntitySet="bec_PartionSet" />
-            <End Role="bec_AssInformationSet" EntitySet="bec_AssInformationSet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_bes_userbec_Partion" Association="Self.FK_bes_userbec_Partion">
-            <End Role="bes_userSet" EntitySet="bes_userSet" />
-            <End Role="bec_PartionSet" EntitySet="bec_PartionSet" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="BeckMan.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BeckManStoreContainer">
+    <EntitySet Name="bes_userSet" EntityType="BeckMan.Store.bes_userSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_AearSet" EntityType="BeckMan.Store.bec_AearSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_PartionSet" EntityType="BeckMan.Store.bec_PartionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_AssInformationSet" EntityType="BeckMan.Store.bec_AssInformationSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_RoleSet" EntityType="BeckMan.Store.bec_RoleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_ProductSet" EntityType="BeckMan.Store.bec_ProductSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="bes_userbec_Partion" Association="BeckMan.Store.bes_userbec_Partion">
+      <End Role="bes_user" EntitySet="bes_userSet" />
+      <End Role="bec_Partion" EntitySet="bec_PartionSet" />
+    </AssociationSet>
+    <AssociationSet Name="bec_Partionbec_AssInformation" Association="BeckMan.Store.bec_Partionbec_AssInformation">
+      <End Role="bec_Partion" EntitySet="bec_PartionSet" />
+      <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
+    </AssociationSet>
+    <AssociationSet Name="bec_Aearbec_AssInformation" Association="BeckMan.Store.bec_Aearbec_AssInformation">
+      <End Role="bec_Aear" EntitySet="bec_AearSet" />
+      <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="bes_userSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDistributor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Activity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_AearSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remak" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_PartionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartionID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PartionName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="bes_user_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_AssInformationSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYTotal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYSales" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYApplication" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYCallCenter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MYOperation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SalesState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AppState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CallCenterState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OperationState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYTotal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYSales" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYApplication" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYCallCenter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AYOperation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="bec_Partion_Id" Type="int" Nullable="false" />
+    <Property Name="bec_Aear_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_RoleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_ProductSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SequeNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="bes_userbec_Partion">
+    <End Role="bes_user" Type="BeckMan.Store.bes_userSet" Multiplicity="1" />
+    <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bes_user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bec_Partion">
+        <PropertyRef Name="bes_user_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bec_Partionbec_AssInformation">
+    <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="1" />
+    <End Role="bec_AssInformation" Type="BeckMan.Store.bec_AssInformationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bec_Partion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bec_AssInformation">
+        <PropertyRef Name="bec_Partion_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bec_Aearbec_AssInformation">
+    <End Role="bec_Aear" Type="BeckMan.Store.bec_AearSet" Multiplicity="1" />
+    <End Role="bec_AssInformation" Type="BeckMan.Store.bec_AssInformationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bec_Aear">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bec_AssInformation">
+        <PropertyRef Name="bec_Aear_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeckMan" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -332,6 +332,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="bec_ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Product)">
+        <MappingFragment StoreEntitySet="bec_ProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SequeNo" ColumnName="SequeNo" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="bes_userbec_Partion" TypeName="BeckMan.bes_userbec_Partion" StoreEntitySet="bec_PartionSet">
       <EndProperty Name="bes_user">
         <ScalarProperty Name="Id" ColumnName="bes_user_Id" />
@@ -356,17 +367,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-          <EntitySetMapping Name="bec_ProductSet">
-            <EntityTypeMapping TypeName="BeckMan.bec_Product">
-              <MappingFragment StoreEntitySet="bec_ProductSet">
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="SequeNo" ColumnName="SequeNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
