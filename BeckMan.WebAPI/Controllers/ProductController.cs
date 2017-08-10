@@ -1,4 +1,5 @@
-﻿using BeckMan.Del;
+﻿using BeckMan.Business.Services;
+using BeckMan.Del;
 using BeckMan.WebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -11,60 +12,42 @@ namespace BeckMan.WebAPI.Controllers
 {
     public class ProductController : ApiController
     {
-        BeckManDBContext dbContext = new BeckManDBContext();
+      
+        ProductService productService = new ProductService();
 
-        // GET: api/Product
-        public IEnumerable<Product> Get()
+
+        public PagingEntity<bec_Product> Get(int start, int limit)
         {
-            return dbContext.Product;
+            return new PagingEntity<bec_Product> { total = productService.Total(), items = productService.Find(null, start, limit) };
         }
 
-        public PagingEntity<Product> Get(int start, int limit)
+        public PagingEntity<bec_Product> Get(string filter,int start, int limit)
         {
-            int count = dbContext.Product.Count();
-            var products= dbContext.Product.OrderBy(p=>p.SequnNo).Skip(start).Take(limit);
-            return new PagingEntity<Product> { total=count, items=products };
-        }
-
-        public PagingEntity<Product> Get(string filter,int start, int limit)
-        {
-            if (string.IsNullOrEmpty(filter.Trim())){
-                return Get(start, limit);
-            }
-            int count = dbContext.Product.Where(p => p.Name.IndexOf(filter) >= 0).Count();
-            var products = dbContext.Product.Where(p=>p.Name.IndexOf(filter) >=0).OrderBy(p => p.SequnNo).Skip(start).Take(limit);
-            return new PagingEntity<Product> { total = count, items = products };
+            return Get(start, limit);
         }
 
         // GET: api/Product/5
-        public Product Get(int id)
+        public bec_Product Get(int id)
         {
-            return dbContext.Product.FirstOrDefault(p => p.ID == id);
+            return productService.Get(id);
         }
 
         // POST: api/Product
-        public void Post([FromBody]Product product)
+        public bec_Product Post([FromBody]bec_Product product)
         {
-            dbContext.Product.Add(product);
-            dbContext.SaveChanges();
+            return productService.Add(product);
         }
 
         // PUT: api/Product/5
-        public void Put(int id, [FromBody]Product product)
+        public void Put(int id, [FromBody]bec_Product product)
         {
-            var item = dbContext.Product.FirstOrDefault(p => p.ID == id);
-            item.Name = product.Name;
-            item.Remark = product.Remark;
-            item.Year = product.Year;
-            item.SequnNo = product.SequnNo;
-            dbContext.SaveChanges();
+            productService.Update(product);
         }
 
         // DELETE: api/Product/5
         public void Delete(int id)
         {
-            dbContext.Product.Remove(dbContext.Product.FirstOrDefault(p => p.ID == id));
-            dbContext.SaveChanges();
+            productService.Delete(new List<int> { id });
         }
 
         public IEnumerable<Product> Find(Product filter,string order,int from,int limit) {

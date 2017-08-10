@@ -16,10 +16,17 @@ namespace BeckMan.Business.Services
         {
             DBContext = new BeckManEntities();
         }
-        public void add(bec_Product product)
+
+        public int Total()
+        {
+            return DBContext.bec_ProductSet.Count();
+        }
+
+        public bec_Product Add(bec_Product product)
         {
             DBContext.bec_ProductSet.Add(product);
             DBContext.SaveChanges();
+            return product;
         }
 
         public bec_Product Get(int id)
@@ -27,24 +34,44 @@ namespace BeckMan.Business.Services
             return DBContext.bec_ProductSet.Find(id);
         }
 
-        public List<bec_Product> pageList(bec_Product filter, int pageIndex, int pageSize)
+        public List<bec_Product> Find(bec_Product filter, int start, int limit)
         {
             Expression<Func<bec_Product, bool>> express = null;
-            if (!string.IsNullOrEmpty(filter.PName))
+            if (filter != null)
             {
-                express.Or(p => p.PName.Contains(filter.PName));
+                if (!string.IsNullOrEmpty(filter.Name))
+                {
+                    express.Or(p => p.Name.Contains(filter.Name));
+                }
+                if (!string.IsNullOrEmpty(filter.Year))
+                {
+                    express.Or(p => p.Year == filter.Year);
+                }
             }
-            if (!string.IsNullOrEmpty(filter.Year))
+            if (express == null)
             {
-                express.Or(p => p.Year == filter.Year);
+                express = r => true;
             }
-            return DBContext.bec_ProductSet.Where(express).OrderBy(p => p.SequeNo).ToList(); ;
+            return DBContext.bec_ProductSet.Where(express).OrderBy(p => p.SequeNo).Skip(start).Take(limit).ToList(); ;
         }
 
-        public void update(bec_Product product)
+        public void Update(bec_Product product)
         {
             DBContext.Entry(product).State = System.Data.Entity.EntityState.Modified;
             DBContext.SaveChanges();
+        }
+
+        public void Delete(List<int> idList)
+        {
+            var sql = "delete bec_ProductSet where id in (";
+            string idString = "";
+            foreach (int id in idList)
+            {
+                idString += id.ToString() + ",";
+            }
+            idString = idString.TrimEnd(',');
+            sql += idString + ")";
+            DBContext.Database.ExecuteSqlCommand(sql);
         }
     }
 }

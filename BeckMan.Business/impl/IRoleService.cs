@@ -16,7 +16,7 @@ namespace BeckMan.Business.impl
         /// <returns></returns>
         bec_Role Add(bec_Role Role);
 
-        bec_Role Update(bec_Role Role);
+        void Update(bec_Role Role);
 
         /// <summary>
         /// 主键查询

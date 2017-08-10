@@ -15,8 +15,8 @@ namespace BeckMan.Del
     public partial class bec_Role
     {
         public int Id { get; set; }
-        public string RName { get; set; }
-        public string ShotName { get; set; }
-        public string Remak { get; set; }
+        public string Name { get; set; }
+        public string ShortName { get; set; }
+        public string Remark { get; set; }
     }
 }

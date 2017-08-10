@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/09/2017 21:12:02
--- Generated from EDMX file: F:\work\甲方资料\B部项目\BeckMan\BeckMan.Del\BeckManDB.edmx
+-- Date Created: 08/10/2017 20:52:59
+-- Generated from EDMX file: C:\beckman服务\BeckMan\BeckMan\BeckMan.Del\BeckManDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,38 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_bec_Aearbec_AssInformation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Aearbec_AssInformation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_bec_Partionbec_AssInformation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Partionbec_AssInformation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_bes_userbec_Partion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[bec_PartionSet] DROP CONSTRAINT [FK_bes_userbec_Partion];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[bec_AearSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_AearSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_AssInformationSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_AssInformationSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_PartionSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_PartionSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_ProductSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_ProductSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_RoleSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_RoleSet];
+GO
+IF OBJECT_ID(N'[dbo].[bes_userSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bes_userSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -92,6 +119,15 @@ CREATE TABLE [dbo].[bec_AssInformationSet] (
 );
 GO
 
+-- Creating table 'bec_RoleSet'
+CREATE TABLE [dbo].[bec_RoleSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [ShortName] nvarchar(max)  NOT NULL,
+    [Remark] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -123,6 +159,12 @@ GO
 -- Creating primary key on [Id] in table 'bec_AssInformationSet'
 ALTER TABLE [dbo].[bec_AssInformationSet]
 ADD CONSTRAINT [PK_bec_AssInformationSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'bec_RoleSet'
+ALTER TABLE [dbo].[bec_RoleSet]
+ADD CONSTRAINT [PK_bec_RoleSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

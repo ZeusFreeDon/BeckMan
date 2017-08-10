@@ -12,17 +12,22 @@ namespace BeckMan.Business.Services
 {
     public class RoleService : IRoleService
     {
-        BeckManEntities dbContext;
+        BeckManEntities DBContext;
 
         public RoleService()
         {
-            dbContext = new BeckManEntities();
+            DBContext = new BeckManEntities();
+        }
+
+        public int Total()
+        {
+            return DBContext.bec_RoleSet.Count();
         }
 
         public bec_Role Add(bec_Role Role)
         {
-            dbContext.bec_RoleSet.Add(Role);
-            dbContext.SaveChanges();
+            DBContext.bec_RoleSet.Add(Role);
+            DBContext.SaveChanges();
             return Role;
         }
 
@@ -36,40 +41,41 @@ namespace BeckMan.Business.Services
             }
             idString = idString.TrimEnd(',');
             sql += idString + ")";
-            dbContext.Database.ExecuteSqlCommand(sql);
+            DBContext.Database.ExecuteSqlCommand(sql);
         }
 
-        public List<bec_Role> Find(bec_Role filter, int pageIndex, int pageSize)
+        public List<bec_Role> Find(bec_Role filter, int start, int limit)
         {
             Expression<Func<bec_Role, bool>> express = null;
 
-            if (!string.IsNullOrEmpty(filter.RName))
+            if (filter != null)
             {
-                express.Or(r => r.RName.Contains(filter.RName));
-            }
-            if (!string.IsNullOrEmpty(filter.ShotName))
-            {
-                express.Or(r => r.ShotName.Contains(filter.ShotName));
+                if (!string.IsNullOrEmpty(filter.Name))
+                {
+                    express.Or(r => r.Name.Contains(filter.Name));
+                }
+                if (!string.IsNullOrEmpty(filter.ShortName))
+                {
+                    express.Or(r => r.ShortName.Contains(filter.ShortName));
+                }
             }
             if (express == null) {
                 express = r => true;
             }
 
-            return dbContext.bec_RoleSet.Where(express).OrderBy(p => p.Id).ToList();
+            return DBContext.bec_RoleSet.Where(express).OrderBy(p => p.Id).Skip(start).Take(limit).ToList();
 
         }
 
         public bec_Role Get(int id)
         {
-            return dbContext.bec_RoleSet.Find(id);
+            return DBContext.bec_RoleSet.Find(id);
         }
 
-        public bec_Role Update(bec_Role Role)
+        public void Update(bec_Role Role)
         {
-            dbContext.Entry(Role).State = EntityState.Modified;
-            dbContext.SaveChanges();
-            return Role;
-
+            DBContext.Entry(Role).State = EntityState.Modified;
+            DBContext.SaveChanges();
         }
     }
 }

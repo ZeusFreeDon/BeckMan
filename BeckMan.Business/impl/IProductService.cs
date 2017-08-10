@@ -9,11 +9,11 @@ namespace BeckMan.Business.impl
 {
     public interface IProductService
     {
-        void add(bec_Product product);
+        bec_Product Add(bec_Product product);
 
-        List<bec_Product> pageList(bec_Product filter, int pageIndex, int pageSize);
+        List<bec_Product> Find(bec_Product filter, int pageIndex, int pageSize);
 
-        void update(bec_Product product);
+        void Update(bec_Product product);
 
         bec_Product Get(int id);
     }

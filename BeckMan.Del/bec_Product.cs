@@ -17,7 +17,7 @@ namespace BeckMan.Del
         public int Id { get; set; }
         public string SequeNo { get; set; }
         public string Year { get; set; }
-        public string PName { get; set; }
+        public string Name { get; set; }
         public string Remark { get; set; }
     }
 }

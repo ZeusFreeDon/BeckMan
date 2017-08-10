@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -275,6 +277,10 @@
     <Content Include="SwaggerUI\lib\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeckMan.Business\BeckMan.Business.csproj">
+      <Project>{3689e0e2-d036-4966-addb-1247aa5ced9c}</Project>
+      <Name>BeckMan.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeckMan.Del\BeckMan.Del.csproj">
       <Project>{081e40d2-4760-4a95-9ca6-ad60bbd9a461}</Project>
       <Name>BeckMan.Del</Name>
