@@ -1,5 +1,6 @@
 ﻿using BeckMan.Business.Services;
 using BeckMan.Del;
+using BeckMan.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace BeckMan.WebAPI.Controllers
     public class RoleController : ApiController
     {
         RoleService roleService = new RoleService();
-        public IEnumerable<bec_Role> Get(int start, int limit)
+        public PagingEntity<bec_Role> Get(int start, int limit)
         {
-            return roleService.Find(null, start, limit);
+            return new PagingEntity<bec_Role> { total = roleService.Total(), items = roleService.Find(null, start, limit) };
         }
 
         public bec_Role Get(int id)
