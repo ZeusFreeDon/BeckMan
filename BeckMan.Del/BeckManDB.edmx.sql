@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/10/2017 21:19:56
--- Generated from EDMX file: C:\beckman服务\BeckMan\BeckMan\BeckMan.Del\BeckManDB.edmx
+-- Date Created: 08/11/2017 14:16:40
+-- Generated from EDMX file: D:\beckman\BeckMan\BeckMan.Del\BeckManDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -109,15 +109,6 @@ CREATE TABLE [dbo].[bec_AssInformationSet] (
 );
 GO
 
--- Creating table 'bec_RoleSet'
-CREATE TABLE [dbo].[bec_RoleSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [ShortName] nvarchar(max)  NOT NULL,
-    [Remark] nvarchar(max)  NOT NULL
-);
-GO
-
 -- Creating table 'bec_ProductSet'
 CREATE TABLE [dbo].[bec_ProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
@@ -125,6 +116,16 @@ CREATE TABLE [dbo].[bec_ProductSet] (
     [Year] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Remark] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'bec_RoleSet'
+CREATE TABLE [dbo].[bec_RoleSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [ShortName] nvarchar(max)  NOT NULL,
+    [Remark] nvarchar(max)  NOT NULL,
+    [Functions] nvarchar(max)  NULL
 );
 GO
 
@@ -156,15 +157,15 @@ ADD CONSTRAINT [PK_bec_AssInformationSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'bec_RoleSet'
-ALTER TABLE [dbo].[bec_RoleSet]
-ADD CONSTRAINT [PK_bec_RoleSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Id] in table 'bec_ProductSet'
 ALTER TABLE [dbo].[bec_ProductSet]
 ADD CONSTRAINT [PK_bec_ProductSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'bec_RoleSet'
+ALTER TABLE [dbo].[bec_RoleSet]
+ADD CONSTRAINT [PK_bec_RoleSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

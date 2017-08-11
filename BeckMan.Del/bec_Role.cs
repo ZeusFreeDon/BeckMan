@@ -18,5 +18,6 @@ namespace BeckMan.Del
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string Remark { get; set; }
+        public string Functions { get; set; }
     }
 }

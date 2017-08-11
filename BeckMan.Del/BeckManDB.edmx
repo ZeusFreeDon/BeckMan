@@ -10,8 +10,8 @@
     <EntitySet Name="bec_AearSet" EntityType="BeckMan.Store.bec_AearSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="bec_PartionSet" EntityType="BeckMan.Store.bec_PartionSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="bec_AssInformationSet" EntityType="BeckMan.Store.bec_AssInformationSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="bec_RoleSet" EntityType="BeckMan.Store.bec_RoleSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="bec_ProductSet" EntityType="BeckMan.Store.bec_ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bec_RoleSet" EntityType="BeckMan.Store.bec_RoleSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="bes_userbec_Partion" Association="BeckMan.Store.bes_userbec_Partion">
       <End Role="bes_user" EntitySet="bes_userSet" />
       <End Role="bec_Partion" EntitySet="bec_PartionSet" />
@@ -80,15 +80,6 @@
     <Property Name="bec_Partion_Id" Type="int" Nullable="false" />
     <Property Name="bec_Aear_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="bec_RoleSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ShortName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
   <EntityType Name="bec_ProductSet">
     <Key>
       <PropertyRef Name="Id" />
@@ -98,6 +89,16 @@
     <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bec_RoleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Functions" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="bes_userbec_Partion">
     <End Role="bes_user" Type="BeckMan.Store.bes_userSet" Multiplicity="1" />
@@ -156,8 +157,8 @@
             <End Role="bec_Aear" EntitySet="bec_AearSet" />
             <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
           </AssociationSet>
-          <EntitySet Name="bec_RoleSet" EntityType="BeckMan.bec_Role" />
           <EntitySet Name="bec_ProductSet" EntityType="BeckMan.bec_Product" />
+          <EntitySet Name="bec_RoleSet" EntityType="BeckMan.bec_Role" />
         </EntityContainer>
         <EntityType Name="bes_user">
           <Documentation>
@@ -241,15 +242,6 @@
           <End Type="BeckMan.bec_Aear" Role="bec_Aear" Multiplicity="1" />
           <End Type="BeckMan.bec_AssInformation" Role="bec_AssInformation" Multiplicity="*" />
         </Association>
-        <EntityType Name="bec_Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="bec_Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -259,6 +251,16 @@
           <Property Name="Year" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="bec_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Functions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -322,16 +324,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="bec_RoleSet">
-      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Role)">
-        <MappingFragment StoreEntitySet="bec_RoleSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="bec_ProductSet">
       <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Product)">
         <MappingFragment StoreEntitySet="bec_ProductSet">
@@ -340,6 +332,17 @@
           <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bec_RoleSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bec_Role)">
+        <MappingFragment StoreEntitySet="bec_RoleSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Functions" ColumnName="Functions" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
