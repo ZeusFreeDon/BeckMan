@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/11/2017 14:16:40
+-- Date Created: 08/11/2017 23:31:22
 -- Generated from EDMX file: D:\beckman\BeckMan\BeckMan.Del\BeckManDB.edmx
 -- --------------------------------------------------
 
@@ -46,26 +46,13 @@ GO
 IF OBJECT_ID(N'[dbo].[bec_RoleSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_RoleSet];
 GO
-IF OBJECT_ID(N'[dbo].[bes_userSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[bes_userSet];
+IF OBJECT_ID(N'[dbo].[bec_UserSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_UserSet];
 GO
 
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
-
--- Creating table 'bes_userSet'
-CREATE TABLE [dbo].[bes_userSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [UserNo] nvarchar(max)  NOT NULL,
-    [UserName] nvarchar(max)  NOT NULL,
-    [RoleType] nvarchar(max)  NOT NULL,
-    [IsDistributor] nvarchar(max)  NOT NULL,
-    [Activity] nvarchar(max)  NOT NULL,
-    [UserCode] nvarchar(max)  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL
-);
-GO
 
 -- Creating table 'bec_AearSet'
 CREATE TABLE [dbo].[bec_AearSet] (
@@ -80,7 +67,7 @@ CREATE TABLE [dbo].[bec_PartionSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PartionID] nvarchar(max)  NOT NULL,
     [PartionName] nvarchar(max)  NOT NULL,
-    [bes_user_Id] int  NOT NULL
+    [bec_UserSet_Id] int  NOT NULL
 );
 GO
 
@@ -119,6 +106,19 @@ CREATE TABLE [dbo].[bec_ProductSet] (
 );
 GO
 
+-- Creating table 'bec_UserSet'
+CREATE TABLE [dbo].[bec_UserSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserNo] nvarchar(max)  NULL,
+    [UserName] nvarchar(max)  NULL,
+    [RoleType] nvarchar(max)  NULL,
+    [IsDistributor] nvarchar(max)  NULL,
+    [Activity] nvarchar(max)  NULL,
+    [UserCode] nvarchar(max)  NULL,
+    [Password] nvarchar(max)  NULL
+);
+GO
+
 -- Creating table 'bec_RoleSet'
 CREATE TABLE [dbo].[bec_RoleSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
@@ -132,12 +132,6 @@ GO
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
-
--- Creating primary key on [Id] in table 'bes_userSet'
-ALTER TABLE [dbo].[bes_userSet]
-ADD CONSTRAINT [PK_bes_userSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
 
 -- Creating primary key on [Id] in table 'bec_AearSet'
 ALTER TABLE [dbo].[bec_AearSet]
@@ -163,6 +157,12 @@ ADD CONSTRAINT [PK_bec_ProductSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'bec_UserSet'
+ALTER TABLE [dbo].[bec_UserSet]
+ADD CONSTRAINT [PK_bec_UserSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Id] in table 'bec_RoleSet'
 ALTER TABLE [dbo].[bec_RoleSet]
 ADD CONSTRAINT [PK_bec_RoleSet]
@@ -172,21 +172,6 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [bes_user_Id] in table 'bec_PartionSet'
-ALTER TABLE [dbo].[bec_PartionSet]
-ADD CONSTRAINT [FK_bes_userbec_Partion]
-    FOREIGN KEY ([bes_user_Id])
-    REFERENCES [dbo].[bes_userSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_bes_userbec_Partion'
-CREATE INDEX [IX_FK_bes_userbec_Partion]
-ON [dbo].[bec_PartionSet]
-    ([bes_user_Id]);
-GO
 
 -- Creating foreign key on [bec_Partion_Id] in table 'bec_AssInformationSet'
 ALTER TABLE [dbo].[bec_AssInformationSet]
@@ -216,6 +201,21 @@ GO
 CREATE INDEX [IX_FK_bec_Aearbec_AssInformation]
 ON [dbo].[bec_AssInformationSet]
     ([bec_Aear_Id]);
+GO
+
+-- Creating foreign key on [bec_UserSet_Id] in table 'bec_PartionSet'
+ALTER TABLE [dbo].[bec_PartionSet]
+ADD CONSTRAINT [FK_bes_userbec_Partion]
+    FOREIGN KEY ([bec_UserSet_Id])
+    REFERENCES [dbo].[bec_UserSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_bes_userbec_Partion'
+CREATE INDEX [IX_FK_bes_userbec_Partion]
+ON [dbo].[bec_PartionSet]
+    ([bec_UserSet_Id]);
 GO
 
 -- --------------------------------------------------
