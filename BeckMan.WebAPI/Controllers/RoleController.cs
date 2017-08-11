@@ -1,6 +1,7 @@
 ﻿using BeckMan.Business.Services;
 using BeckMan.Del;
 using BeckMan.WebAPI.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,12 @@ namespace BeckMan.WebAPI.Controllers
     public class RoleController : ApiController
     {
         RoleService roleService = new RoleService();
+
+
+        public PagingEntity<bec_Role> Get()
+        {
+            return new PagingEntity<bec_Role> { total = roleService.Total(), items = roleService.Find() };
+        }
 
         public PagingEntity<bec_Role> Get(int start, int limit)
         {
@@ -50,5 +57,7 @@ namespace BeckMan.WebAPI.Controllers
         {
             roleService.Delete(new List<int> { id });
         }
+
+        
     }
 }

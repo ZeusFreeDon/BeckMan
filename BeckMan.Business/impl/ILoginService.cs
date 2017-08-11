@@ -14,7 +14,7 @@ namespace BeckMan.Business.impl
         /// </summary>
         /// <param name="userCode"></param>
         /// <param name="password"></param>
-        bes_user Login(string userCode, string password);
+        bec_User Login(string userCode, string password);
 
         /// <summary>
         /// 用户退出

@@ -9,7 +9,7 @@ namespace BeckMan.Business.impl
 {
     public interface IUserService
     {
-        bes_user Add(bes_user user);
+        bec_User Add(bec_User user);
 
 
     }

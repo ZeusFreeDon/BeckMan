@@ -12,12 +12,12 @@ namespace BeckMan.Del
     using System;
     using System.Collections.Generic;
     
-    public partial class bes_user
+    public partial class bec_User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public bes_user()
+        public bec_User()
         {
-            this.bec_Partion = new HashSet<bec_Partion>();
+            this.bec_PartionSet = new HashSet<bec_Partion>();
         }
     
         public int Id { get; set; }
@@ -30,6 +30,6 @@ namespace BeckMan.Del
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bec_Partion> bec_Partion { get; set; }
+        public virtual ICollection<bec_Partion> bec_PartionSet { get; set; }
     }
 }

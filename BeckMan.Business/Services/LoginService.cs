@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BeckMan.Business.Services
 {
-    public class LoginService : ILoginService
+    public class LoginService 
     {
         BeckManEntities dbContext;
 
@@ -17,9 +17,9 @@ namespace BeckMan.Business.Services
             dbContext = new BeckManEntities();
         }
 
-        public bes_user Login(string userCode, string password)
+        public bec_User Login(string userCode, string password)
         {
-            return dbContext.bes_userSet.SingleOrDefault(u => u.UserCode == userCode && u.Password == password);
+            return dbContext.bec_UserSet.SingleOrDefault(u => u.UserCode == userCode && u.Password == password);
         }
 
         public void LogOut(string userCode)

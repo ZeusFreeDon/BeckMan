@@ -25,11 +25,11 @@ namespace BeckMan.Del
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<bes_user> bes_userSet { get; set; }
         public virtual DbSet<bec_Aear> bec_AearSet { get; set; }
         public virtual DbSet<bec_Partion> bec_PartionSet { get; set; }
         public virtual DbSet<bec_AssInformation> bec_AssInformationSet { get; set; }
         public virtual DbSet<bec_Product> bec_ProductSet { get; set; }
+        public virtual DbSet<bec_User> bec_UserSet { get; set; }
         public virtual DbSet<bec_Role> bec_RoleSet { get; set; }
     }
 }

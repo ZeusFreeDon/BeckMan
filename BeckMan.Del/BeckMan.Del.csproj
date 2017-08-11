@@ -82,7 +82,7 @@
     <Compile Include="bec_Role.cs">
       <DependentUpon>BeckManDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="bes_user.cs">
+    <Compile Include="bec_User.cs">
       <DependentUpon>BeckManDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs" />

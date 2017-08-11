@@ -49,6 +49,11 @@ namespace BeckMan.Business.Services
             DBContext.Database.ExecuteSqlCommand(sql);
         }
 
+        public List<bec_Role> Find()
+        {
+            return DBContext.bec_RoleSet.OrderBy(p => p.Name).ToList(); ;
+        }
+
         public List<bec_Role> Find(int start, int limit)
         {
             return DBContext.bec_RoleSet.OrderBy(p => p.Name).Skip(start).Take(limit).ToList(); ;
@@ -64,9 +69,9 @@ namespace BeckMan.Business.Services
             return DBContext.bec_RoleSet.Find(id);
         }
 
-        public void Update(bec_Role Role)
+        public void Update(bec_Role role)
         {
-            DBContext.Entry(Role).State = EntityState.Modified;
+            DBContext.Entry(role).State = EntityState.Modified;
             DBContext.SaveChanges();
         }
     }

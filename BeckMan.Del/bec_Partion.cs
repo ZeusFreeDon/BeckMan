@@ -24,8 +24,8 @@ namespace BeckMan.Del
         public string PartionID { get; set; }
         public string PartionName { get; set; }
     
-        public virtual bes_user bes_user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bec_AssInformation> bec_AssInformation { get; set; }
+        public virtual bec_User bec_UserSet { get; set; }
     }
 }
