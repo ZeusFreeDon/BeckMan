@@ -13,9 +13,19 @@ namespace BeckMan.WebAPI.Controllers
     public class RoleController : ApiController
     {
         RoleService roleService = new RoleService();
+
         public PagingEntity<bec_Role> Get(int start, int limit)
         {
-            return new PagingEntity<bec_Role> { total = roleService.Total(), items = roleService.Find(null, start, limit) };
+            return new PagingEntity<bec_Role> { total = roleService.Total(), items = roleService.Find(start, limit) };
+        }
+
+        public PagingEntity<bec_Role> Get(string filter, int start, int limit)
+        {
+            if (string.IsNullOrEmpty(filter))
+            {
+                return Get(start, limit);
+            }
+            return new PagingEntity<bec_Role> { total = roleService.Total(filter), items = roleService.Find(filter, start, limit) };
         }
 
         public bec_Role Get(int id)

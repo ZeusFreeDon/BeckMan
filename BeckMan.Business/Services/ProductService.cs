@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace BeckMan.Business.Services
 {
-    public class ProductService : IProductService
+    public class ProductService
     {
         BeckManEntities DBContext;
         public ProductService()
@@ -20,6 +20,11 @@ namespace BeckMan.Business.Services
         public int Total()
         {
             return DBContext.bec_ProductSet.Count();
+        }
+
+        public int Total(string namefilter)
+        {
+            return DBContext.bec_ProductSet.Where(p => p.Name.Contains(namefilter)).Count() ;
         }
 
         public bec_Product Add(bec_Product product)
@@ -34,25 +39,14 @@ namespace BeckMan.Business.Services
             return DBContext.bec_ProductSet.Find(id);
         }
 
-        public List<bec_Product> Find(bec_Product filter, int start, int limit)
+        public List<bec_Product> Find(int start, int limit)
         {
-            Expression<Func<bec_Product, bool>> express = null;
-            if (filter != null)
-            {
-                if (!string.IsNullOrEmpty(filter.Name))
-                {
-                    express.Or(p => p.Name.Contains(filter.Name));
-                }
-                if (!string.IsNullOrEmpty(filter.Year))
-                {
-                    express.Or(p => p.Year == filter.Year);
-                }
-            }
-            if (express == null)
-            {
-                express = r => true;
-            }
-            return DBContext.bec_ProductSet.Where(express).OrderBy(p => p.SequeNo).Skip(start).Take(limit).ToList(); ;
+            return DBContext.bec_ProductSet.OrderBy(p => p.SequeNo).Skip(start).Take(limit).ToList(); ;
+        }
+
+        public List<bec_Product> Find(string namefilter, int start, int limit)
+        {
+            return DBContext.bec_ProductSet.Where(p=>p.Name.Contains(namefilter)).OrderBy(p => p.SequeNo).Skip(start).Take(limit).ToList(); ;
         }
 
         public void Update(bec_Product product)

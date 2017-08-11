@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 namespace BeckMan.Business.Services
 {
-    public class RoleService : IRoleService
+    public class RoleService
     {
         BeckManEntities DBContext;
 
@@ -22,6 +22,11 @@ namespace BeckMan.Business.Services
         public int Total()
         {
             return DBContext.bec_RoleSet.Count();
+        }
+
+        public int Total(string namefilter)
+        {
+            return DBContext.bec_RoleSet.Where(p => p.Name.Contains(namefilter)).Count();
         }
 
         public bec_Role Add(bec_Role Role)
@@ -44,27 +49,14 @@ namespace BeckMan.Business.Services
             DBContext.Database.ExecuteSqlCommand(sql);
         }
 
-        public List<bec_Role> Find(bec_Role filter, int start, int limit)
+        public List<bec_Role> Find(int start, int limit)
         {
-            Expression<Func<bec_Role, bool>> express = null;
+            return DBContext.bec_RoleSet.OrderBy(p => p.Name).Skip(start).Take(limit).ToList(); ;
+        }
 
-            if (filter != null)
-            {
-                if (!string.IsNullOrEmpty(filter.Name))
-                {
-                    express.Or(r => r.Name.Contains(filter.Name));
-                }
-                if (!string.IsNullOrEmpty(filter.ShortName))
-                {
-                    express.Or(r => r.ShortName.Contains(filter.ShortName));
-                }
-            }
-            if (express == null) {
-                express = r => true;
-            }
-
-            return DBContext.bec_RoleSet.Where(express).OrderBy(p => p.Id).Skip(start).Take(limit).ToList();
-
+        public List<bec_Role> Find(string namefilter, int start, int limit)
+        {
+            return DBContext.bec_RoleSet.Where(p => p.Name.Contains(namefilter)).OrderBy(p => p.Name).Skip(start).Take(limit).ToList(); ;
         }
 
         public bec_Role Get(int id)

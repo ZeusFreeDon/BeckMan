@@ -18,12 +18,16 @@ namespace BeckMan.WebAPI.Controllers
 
         public PagingEntity<bec_Product> Get(int start, int limit)
         {
-            return new PagingEntity<bec_Product> { total = productService.Total(), items = productService.Find(null, start, limit) };
+            return new PagingEntity<bec_Product> { total = productService.Total(), items = productService.Find(start, limit) };
         }
 
         public PagingEntity<bec_Product> Get(string filter,int start, int limit)
         {
-            return Get(start, limit);
+            if (string.IsNullOrEmpty(filter))
+            {
+                return Get(start, limit);
+            }
+            return new PagingEntity<bec_Product> { total = productService.Total(filter), items = productService.Find(filter, start, limit) };
         }
 
         // GET: api/Product/5
