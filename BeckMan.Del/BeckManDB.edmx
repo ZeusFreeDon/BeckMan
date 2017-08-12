@@ -12,6 +12,7 @@
     <EntitySet Name="bec_ProductSet" EntityType="BeckMan.Store.bec_ProductSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="bec_UserSet" EntityType="BeckMan.Store.bec_UserSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="bec_RoleSet" EntityType="BeckMan.Store.bec_RoleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bsc_user" EntityType="BeckMan.Store.bsc_user" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="bec_Partionbec_AssInformation" Association="BeckMan.Store.bec_Partionbec_AssInformation">
       <End Role="bec_Partion" EntitySet="bec_PartionSet" />
       <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
@@ -20,8 +21,8 @@
       <End Role="bec_Aear" EntitySet="bec_AearSet" />
       <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
     </AssociationSet>
-    <AssociationSet Name="FK_bes_userbec_Partion" Association="BeckMan.Store.FK_bes_userbec_Partion">
-      <End Role="bec_UserSet" EntitySet="bec_UserSet" />
+    <AssociationSet Name="bec_Userbec_Partion" Association="BeckMan.Store.bec_Userbec_Partion">
+      <End Role="bec_User" EntitySet="bec_UserSet" />
       <End Role="bec_Partion" EntitySet="bec_PartionSet" />
     </AssociationSet>
   </EntityContainer>
@@ -40,7 +41,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PartionID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PartionName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="bec_UserSet_Id" Type="int" Nullable="false" />
+    <Property Name="bec_User_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="bec_AssInformationSet">
     <Key>
@@ -89,6 +90,7 @@
     <Property Name="Activity" Type="nvarchar(max)" Nullable="true" />
     <Property Name="UserCode" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MDUserID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="bec_RoleSet">
     <Key>
@@ -99,6 +101,32 @@
     <Property Name="ShortName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Functions" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="bsc_user">
+    <Key>
+      <PropertyRef Name="userID" />
+      <PropertyRef Name="userCode" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userCode" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="userName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="roleID" Type="int" Nullable="true" />
+    <Property Name="regionID" Type="int" Nullable="true" />
+    <Property Name="password" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="tel" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="phone" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="assistantEMail" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="auditDiscount" Type="decimal" Nullable="true" Precision="18" Scale="2" />
+    <Property Name="isSaleMan" Type="bit" Nullable="true" />
+    <Property Name="saleManID" Type="int" Nullable="true" />
+    <Property Name="isDistributor" Type="bit" Nullable="true" />
+    <Property Name="distributorID" Type="int" Nullable="true" />
+    <Property Name="isSystem" Type="bit" Nullable="true" />
+    <Property Name="isAllowed" Type="bit" Nullable="true" />
+    <Property Name="remark" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="createDate" Type="datetime" Nullable="true" />
+    <Property Name="saleTypeID" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="bec_Partionbec_AssInformation">
     <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="1" />
@@ -124,15 +152,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_bes_userbec_Partion">
-    <End Role="bec_UserSet" Type="BeckMan.Store.bec_UserSet" Multiplicity="1" />
+  <Association Name="bec_Userbec_Partion">
+    <End Role="bec_User" Type="BeckMan.Store.bec_UserSet" Multiplicity="0..1" />
     <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="bec_UserSet">
+      <Principal Role="bec_User">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="bec_Partion">
-        <PropertyRef Name="bec_UserSet_Id" />
+        <PropertyRef Name="bec_User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -154,11 +182,12 @@
           </AssociationSet>
           <EntitySet Name="bec_ProductSet" EntityType="BeckMan.bec_Product" />
           <EntitySet Name="bec_UserSet" EntityType="BeckMan.bec_User" />
-          <AssociationSet Name="FK_bes_userbec_Partion" Association="BeckMan.FK_bes_userbec_Partion">
-            <End Role="bec_UserSet" EntitySet="bec_UserSet" />
+          <EntitySet Name="bec_RoleSet" EntityType="BeckMan.bec_Role" />
+          <EntitySet Name="bsc_user" EntityType="BeckMan.bsc_user" />
+          <AssociationSet Name="bec_Userbec_Partion" Association="BeckMan.bec_Userbec_Partion">
+            <End Role="bec_User" EntitySet="bec_UserSet" />
             <End Role="bec_Partion" EntitySet="bec_PartionSet" />
           </AssociationSet>
-          <EntitySet Name="bec_RoleSet" EntityType="BeckMan.bec_Role" />
           </EntityContainer>
         <EntityType Name="bec_Aear">
           <Key>
@@ -177,7 +206,7 @@
           <Property Name="PartionID" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PartionName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="bec_AssInformation" Relationship="BeckMan.bec_Partionbec_AssInformation" FromRole="bec_Partion" ToRole="bec_AssInformation" />
-          <NavigationProperty Name="bec_UserSet" Relationship="BeckMan.FK_bes_userbec_Partion" FromRole="bec_Partion" ToRole="bec_UserSet" />
+          <NavigationProperty Name="bec_User" Relationship="BeckMan.bec_Userbec_Partion" FromRole="bec_Partion" ToRole="bec_User" />
         </EntityType>
         <EntityType Name="bec_AssInformation">
           <Key>
@@ -234,12 +263,9 @@
           <Property Name="Activity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="bec_PartionSet" Relationship="BeckMan.FK_bes_userbec_Partion" FromRole="bec_UserSet" ToRole="bec_Partion" />
+          <Property Name="MDUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bec_Partion" Relationship="BeckMan.bec_Userbec_Partion" FromRole="bec_User" ToRole="bec_Partion" />
         </EntityType>
-        <Association Name="FK_bes_userbec_Partion">
-          <End Type="BeckMan.bec_User" Role="bec_UserSet" Multiplicity="1" />
-          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="*" />
-        </Association>
         <EntityType Name="bec_Role">
           <Key>
             <PropertyRef Name="Id" />
@@ -250,6 +276,36 @@
           <Property Name="Remark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Functions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="bsc_user">
+          <Key>
+            <PropertyRef Name="userID" />
+            <PropertyRef Name="userCode" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleID" Type="Int32" />
+          <Property Name="regionID" Type="Int32" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="assistantEMail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="auditDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="isSaleMan" Type="Boolean" />
+          <Property Name="saleManID" Type="Int32" />
+          <Property Name="isDistributor" Type="Boolean" />
+          <Property Name="distributorID" Type="Int32" />
+          <Property Name="isSystem" Type="Boolean" />
+          <Property Name="isAllowed" Type="Boolean" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="saleTypeID" Type="Int32" />
+        </EntityType>
+        <Association Name="bec_Userbec_Partion">
+          <End Type="BeckMan.bec_User" Role="bec_User" Multiplicity="0..1" />
+          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -320,6 +376,7 @@
           <ScalarProperty Name="Activity" ColumnName="Activity" />
           <ScalarProperty Name="UserCode" ColumnName="UserCode" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="MDUserID" ColumnName="MDUserID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -331,6 +388,32 @@
           <ScalarProperty Name="ShortName" ColumnName="ShortName" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
           <ScalarProperty Name="Functions" ColumnName="Functions" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bsc_user">
+      <EntityTypeMapping TypeName="IsTypeOf(BeckMan.bsc_user)">
+        <MappingFragment StoreEntitySet="bsc_user">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="userCode" ColumnName="userCode" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="regionID" ColumnName="regionID" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="assistantEMail" ColumnName="assistantEMail" />
+          <ScalarProperty Name="auditDiscount" ColumnName="auditDiscount" />
+          <ScalarProperty Name="isSaleMan" ColumnName="isSaleMan" />
+          <ScalarProperty Name="saleManID" ColumnName="saleManID" />
+          <ScalarProperty Name="isDistributor" ColumnName="isDistributor" />
+          <ScalarProperty Name="distributorID" ColumnName="distributorID" />
+          <ScalarProperty Name="isSystem" ColumnName="isSystem" />
+          <ScalarProperty Name="isAllowed" ColumnName="isAllowed" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="saleTypeID" ColumnName="saleTypeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -350,13 +433,14 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_bes_userbec_Partion" TypeName="BeckMan.FK_bes_userbec_Partion" StoreEntitySet="bec_PartionSet">
-      <EndProperty Name="bec_UserSet">
-        <ScalarProperty Name="Id" ColumnName="bec_UserSet_Id" />
+    <AssociationSetMapping Name="bec_Userbec_Partion" TypeName="BeckMan.bec_Userbec_Partion" StoreEntitySet="bec_PartionSet">
+      <EndProperty Name="bec_User">
+        <ScalarProperty Name="Id" ColumnName="bec_User_Id" />
       </EndProperty>
       <EndProperty Name="bec_Partion">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="bec_User_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

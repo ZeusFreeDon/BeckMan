@@ -11,6 +11,10 @@ namespace BeckMan.Business.impl
     {
         bec_User Add(bec_User user);
 
-
+        /// <summary>
+        /// 查找Marsdata用户
+        /// </summary>
+        /// <returns></returns>
+        List<bsc_user> FindMDUsers();
     }
 }

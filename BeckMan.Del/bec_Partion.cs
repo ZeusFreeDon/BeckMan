@@ -26,6 +26,6 @@ namespace BeckMan.Del
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bec_AssInformation> bec_AssInformation { get; set; }
-        public virtual bec_User bec_UserSet { get; set; }
+        public virtual bec_User bec_User { get; set; }
     }
 }

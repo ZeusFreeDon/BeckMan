@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/11/2017 23:31:22
--- Generated from EDMX file: D:\beckman\BeckMan\BeckMan.Del\BeckManDB.edmx
+-- Date Created: 08/12/2017 16:09:01
+-- Generated from EDMX file: F:\work\甲方资料\B部项目\BeckMan\BeckMan.Del\BeckManDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_bec_Aearbec_AssInformation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Aearbec_AssInformation];
-GO
 IF OBJECT_ID(N'[dbo].[FK_bec_Partionbec_AssInformation]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Partionbec_AssInformation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_bec_Aearbec_AssInformation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Aearbec_AssInformation];
 GO
 IF OBJECT_ID(N'[dbo].[FK_bes_userbec_Partion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[bec_PartionSet] DROP CONSTRAINT [FK_bes_userbec_Partion];
@@ -34,20 +34,23 @@ GO
 IF OBJECT_ID(N'[dbo].[bec_AearSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_AearSet];
 GO
-IF OBJECT_ID(N'[dbo].[bec_AssInformationSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[bec_AssInformationSet];
-GO
 IF OBJECT_ID(N'[dbo].[bec_PartionSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_PartionSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_AssInformationSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_AssInformationSet];
 GO
 IF OBJECT_ID(N'[dbo].[bec_ProductSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_ProductSet];
 GO
+IF OBJECT_ID(N'[dbo].[bec_UserSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_UserSet];
+GO
 IF OBJECT_ID(N'[dbo].[bec_RoleSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_RoleSet];
 GO
-IF OBJECT_ID(N'[dbo].[bec_UserSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[bec_UserSet];
+IF OBJECT_ID(N'[dbo].[bsc_user]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bsc_user];
 GO
 
 -- --------------------------------------------------
@@ -67,7 +70,7 @@ CREATE TABLE [dbo].[bec_PartionSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PartionID] nvarchar(max)  NOT NULL,
     [PartionName] nvarchar(max)  NOT NULL,
-    [bec_UserSet_Id] int  NOT NULL
+    [bec_User_Id] int  NULL
 );
 GO
 
@@ -115,7 +118,8 @@ CREATE TABLE [dbo].[bec_UserSet] (
     [IsDistributor] nvarchar(max)  NULL,
     [Activity] nvarchar(max)  NULL,
     [UserCode] nvarchar(max)  NULL,
-    [Password] nvarchar(max)  NULL
+    [Password] nvarchar(max)  NULL,
+    [MDUserID] int  NOT NULL
 );
 GO
 
@@ -126,6 +130,31 @@ CREATE TABLE [dbo].[bec_RoleSet] (
     [ShortName] nvarchar(max)  NOT NULL,
     [Remark] nvarchar(max)  NOT NULL,
     [Functions] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'bsc_user'
+CREATE TABLE [dbo].[bsc_user] (
+    [userID] int IDENTITY(1,1) NOT NULL,
+    [userCode] nvarchar(20)  NOT NULL,
+    [userName] nvarchar(50)  NULL,
+    [roleID] int  NULL,
+    [regionID] int  NULL,
+    [password] nvarchar(50)  NULL,
+    [tel] nvarchar(50)  NULL,
+    [phone] nvarchar(50)  NULL,
+    [email] nvarchar(1000)  NULL,
+    [assistantEMail] nvarchar(1000)  NULL,
+    [auditDiscount] decimal(18,2)  NULL,
+    [isSaleMan] bit  NULL,
+    [saleManID] int  NULL,
+    [isDistributor] bit  NULL,
+    [distributorID] int  NULL,
+    [isSystem] bit  NULL,
+    [isAllowed] bit  NULL,
+    [remark] nvarchar(200)  NULL,
+    [createDate] datetime  NULL,
+    [saleTypeID] int  NULL
 );
 GO
 
@@ -169,6 +198,12 @@ ADD CONSTRAINT [PK_bec_RoleSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [userID], [userCode] in table 'bsc_user'
+ALTER TABLE [dbo].[bsc_user]
+ADD CONSTRAINT [PK_bsc_user]
+    PRIMARY KEY CLUSTERED ([userID], [userCode] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -203,19 +238,19 @@ ON [dbo].[bec_AssInformationSet]
     ([bec_Aear_Id]);
 GO
 
--- Creating foreign key on [bec_UserSet_Id] in table 'bec_PartionSet'
+-- Creating foreign key on [bec_User_Id] in table 'bec_PartionSet'
 ALTER TABLE [dbo].[bec_PartionSet]
-ADD CONSTRAINT [FK_bes_userbec_Partion]
-    FOREIGN KEY ([bec_UserSet_Id])
+ADD CONSTRAINT [FK_bec_Userbec_Partion]
+    FOREIGN KEY ([bec_User_Id])
     REFERENCES [dbo].[bec_UserSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_bes_userbec_Partion'
-CREATE INDEX [IX_FK_bes_userbec_Partion]
+-- Creating non-clustered index for FOREIGN KEY 'FK_bec_Userbec_Partion'
+CREATE INDEX [IX_FK_bec_Userbec_Partion]
 ON [dbo].[bec_PartionSet]
-    ([bec_UserSet_Id]);
+    ([bec_User_Id]);
 GO
 
 -- --------------------------------------------------

@@ -31,5 +31,6 @@ namespace BeckMan.Del
         public virtual DbSet<bec_Product> bec_ProductSet { get; set; }
         public virtual DbSet<bec_User> bec_UserSet { get; set; }
         public virtual DbSet<bec_Role> bec_RoleSet { get; set; }
+        public virtual DbSet<bsc_user> bsc_user { get; set; }
     }
 }
