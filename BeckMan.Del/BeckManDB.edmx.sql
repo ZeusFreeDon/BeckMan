@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/12/2017 10:44:50
--- Generated from EDMX file: D:\beckman\BeckMan\BeckMan.Del\BeckManDB.edmx
+-- Date Created: 08/12/2017 19:07:31
+-- Generated from EDMX file: F:\work\甲方资料\B部项目\BeckMan\BeckMan.Del\BeckManDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,20 +17,17 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_bec_Aearbec_AssInformation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Aearbec_AssInformation];
-GO
 IF OBJECT_ID(N'[dbo].[FK_bec_Partionbec_AssInformation]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Partionbec_AssInformation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_bec_Aearbec_AssInformation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[bec_AssInformationSet] DROP CONSTRAINT [FK_bec_Aearbec_AssInformation];
 GO
 IF OBJECT_ID(N'[dbo].[FK_bec_User_Role_bec_RoleSet]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[bec_User_Role] DROP CONSTRAINT [FK_bec_User_Role_bec_RoleSet];
 GO
 IF OBJECT_ID(N'[dbo].[FK_bec_User_Role_bec_UserSet]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[bec_User_Role] DROP CONSTRAINT [FK_bec_User_Role_bec_UserSet];
-GO
-IF OBJECT_ID(N'[dbo].[FK_bes_userbec_Partion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[bec_PartionSet] DROP CONSTRAINT [FK_bes_userbec_Partion];
 GO
 
 -- --------------------------------------------------
@@ -40,11 +37,11 @@ GO
 IF OBJECT_ID(N'[dbo].[bec_AearSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_AearSet];
 GO
-IF OBJECT_ID(N'[dbo].[bec_AssInformationSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[bec_AssInformationSet];
-GO
 IF OBJECT_ID(N'[dbo].[bec_PartionSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_PartionSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_AssInformationSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_AssInformationSet];
 GO
 IF OBJECT_ID(N'[dbo].[bec_ProductSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_ProductSet];
@@ -52,11 +49,11 @@ GO
 IF OBJECT_ID(N'[dbo].[bec_RoleSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_RoleSet];
 GO
-IF OBJECT_ID(N'[dbo].[bec_User_Role]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[bec_User_Role];
-GO
 IF OBJECT_ID(N'[dbo].[bec_UserSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[bec_UserSet];
+GO
+IF OBJECT_ID(N'[dbo].[bec_User_Role]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[bec_User_Role];
 GO
 
 -- --------------------------------------------------
@@ -76,7 +73,7 @@ CREATE TABLE [dbo].[bec_PartionSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PartionID] nvarchar(max)  NOT NULL,
     [PartionName] nvarchar(max)  NOT NULL,
-    [bec_UserSet_Id] int  NOT NULL
+    [bec_User_Id] int  NULL
 );
 GO
 
@@ -225,21 +222,6 @@ ON [dbo].[bec_AssInformationSet]
     ([bec_Aear_Id]);
 GO
 
--- Creating foreign key on [bec_UserSet_Id] in table 'bec_PartionSet'
-ALTER TABLE [dbo].[bec_PartionSet]
-ADD CONSTRAINT [FK_bes_userbec_Partion]
-    FOREIGN KEY ([bec_UserSet_Id])
-    REFERENCES [dbo].[bec_UserSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_bes_userbec_Partion'
-CREATE INDEX [IX_FK_bes_userbec_Partion]
-ON [dbo].[bec_PartionSet]
-    ([bec_UserSet_Id]);
-GO
-
 -- Creating foreign key on [bec_RoleSet_Id] in table 'bec_User_Role'
 ALTER TABLE [dbo].[bec_User_Role]
 ADD CONSTRAINT [FK_bec_User_Role_bec_RoleSet]
@@ -262,6 +244,21 @@ GO
 CREATE INDEX [IX_FK_bec_User_Role_bec_UserSet]
 ON [dbo].[bec_User_Role]
     ([bec_UserSet_Id]);
+GO
+
+-- Creating foreign key on [bec_User_Id] in table 'bec_PartionSet'
+ALTER TABLE [dbo].[bec_PartionSet]
+ADD CONSTRAINT [FK_bec_Userbec_Partion]
+    FOREIGN KEY ([bec_User_Id])
+    REFERENCES [dbo].[bec_UserSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_bec_Userbec_Partion'
+CREATE INDEX [IX_FK_bec_Userbec_Partion]
+ON [dbo].[bec_PartionSet]
+    ([bec_User_Id]);
 GO
 
 -- --------------------------------------------------

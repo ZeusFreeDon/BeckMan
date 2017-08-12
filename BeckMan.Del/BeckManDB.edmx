@@ -21,10 +21,6 @@
       <End Role="bec_Aear" EntitySet="bec_AearSet" />
       <End Role="bec_AssInformation" EntitySet="bec_AssInformationSet" />
     </AssociationSet>
-    <AssociationSet Name="FK_bes_userbec_Partion" Association="BeckMan.Store.FK_bes_userbec_Partion">
-      <End Role="bec_UserSet" EntitySet="bec_UserSet" />
-      <End Role="bec_Partion" EntitySet="bec_PartionSet" />
-    </AssociationSet>
     <AssociationSet Name="FK_bec_User_Role_bec_RoleSet" Association="BeckMan.Store.FK_bec_User_Role_bec_RoleSet">
       <End Role="bec_RoleSet" EntitySet="bec_RoleSet" />
       <End Role="bec_User_Role" EntitySet="bec_User_Role" />
@@ -32,6 +28,10 @@
     <AssociationSet Name="FK_bec_User_Role_bec_UserSet" Association="BeckMan.Store.FK_bec_User_Role_bec_UserSet">
       <End Role="bec_UserSet" EntitySet="bec_UserSet" />
       <End Role="bec_User_Role" EntitySet="bec_User_Role" />
+    </AssociationSet>
+    <AssociationSet Name="bec_Userbec_Partion" Association="BeckMan.Store.bec_Userbec_Partion">
+      <End Role="bec_User" EntitySet="bec_UserSet" />
+      <End Role="bec_Partion" EntitySet="bec_PartionSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="bec_AearSet">
@@ -49,7 +49,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PartionID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PartionName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="bec_UserSet_Id" Type="int" Nullable="false" />
+    <Property Name="bec_User_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="bec_AssInformationSet">
     <Key>
@@ -141,15 +141,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_bes_userbec_Partion">
-    <End Role="bec_UserSet" Type="BeckMan.Store.bec_UserSet" Multiplicity="1" />
+  <Association Name="bec_Userbec_Partion">
+    <End Role="bec_User" Type="BeckMan.Store.bec_UserSet" Multiplicity="0..1" />
     <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="bec_UserSet">
+      <Principal Role="bec_User">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="bec_Partion">
-        <PropertyRef Name="bec_UserSet_Id" />
+        <PropertyRef Name="bec_User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -196,13 +196,13 @@
           <EntitySet Name="bec_ProductSet" EntityType="BeckMan.bec_Product" />
           <EntitySet Name="bec_RoleSet" EntityType="BeckMan.bec_Role" />
           <EntitySet Name="bec_UserSet" EntityType="BeckMan.bec_User" />
-          <AssociationSet Name="FK_bes_userbec_Partion" Association="BeckMan.FK_bes_userbec_Partion">
-            <End Role="bec_UserSet" EntitySet="bec_UserSet" />
-            <End Role="bec_Partion" EntitySet="bec_PartionSet" />
-          </AssociationSet>
           <AssociationSet Name="bec_User_Role" Association="BeckMan.bec_User_Role">
             <End Role="bec_RoleSet" EntitySet="bec_RoleSet" />
             <End Role="bec_UserSet" EntitySet="bec_UserSet" />
+          </AssociationSet>
+          <AssociationSet Name="bec_Userbec_Partion" Association="BeckMan.bec_Userbec_Partion">
+            <End Role="bec_User" EntitySet="bec_UserSet" />
+            <End Role="bec_Partion" EntitySet="bec_PartionSet" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="bec_Aear">
@@ -222,7 +222,7 @@
           <Property Name="PartionID" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PartionName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="bec_AssInformation" Relationship="BeckMan.bec_Partionbec_AssInformation" FromRole="bec_Partion" ToRole="bec_AssInformation" />
-          <NavigationProperty Name="bec_UserSet" Relationship="BeckMan.FK_bes_userbec_Partion" FromRole="bec_Partion" ToRole="bec_UserSet" />
+          <NavigationProperty Name="bec_User" Relationship="BeckMan.bec_Userbec_Partion" FromRole="bec_Partion" ToRole="bec_User" />
         </EntityType>
         <EntityType Name="bec_AssInformation">
           <Key>
@@ -290,16 +290,16 @@
           <Property Name="Activity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="bec_PartionSet" Relationship="BeckMan.FK_bes_userbec_Partion" FromRole="bec_UserSet" ToRole="bec_Partion" />
           <NavigationProperty Name="bec_RoleSet" Relationship="BeckMan.bec_User_Role" FromRole="bec_UserSet" ToRole="bec_RoleSet" />
+          <NavigationProperty Name="bec_Partion" Relationship="BeckMan.bec_Userbec_Partion" FromRole="bec_User" ToRole="bec_Partion" />
         </EntityType>
-        <Association Name="FK_bes_userbec_Partion">
-          <End Type="BeckMan.bec_User" Role="bec_UserSet" Multiplicity="1" />
-          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="*" />
-        </Association>
         <Association Name="bec_User_Role">
           <End Type="BeckMan.bec_Role" Role="bec_RoleSet" Multiplicity="*" />
           <End Type="BeckMan.bec_User" Role="bec_UserSet" Multiplicity="*" />
+        </Association>
+        <Association Name="bec_Userbec_Partion">
+          <End Type="BeckMan.bec_User" Role="bec_User" Multiplicity="0..1" />
+          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -401,14 +401,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_bes_userbec_Partion" TypeName="BeckMan.FK_bes_userbec_Partion" StoreEntitySet="bec_PartionSet">
-      <EndProperty Name="bec_UserSet">
-        <ScalarProperty Name="Id" ColumnName="bec_UserSet_Id" />
-      </EndProperty>
-      <EndProperty Name="bec_Partion">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="bec_User_Role" TypeName="BeckMan.bec_User_Role" StoreEntitySet="bec_User_Role">
       <EndProperty Name="bec_RoleSet">
         <ScalarProperty Name="Id" ColumnName="bec_RoleSet_Id" />
@@ -416,6 +408,15 @@
       <EndProperty Name="bec_UserSet">
         <ScalarProperty Name="Id" ColumnName="bec_UserSet_Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="bec_Userbec_Partion" TypeName="BeckMan.bec_Userbec_Partion" StoreEntitySet="bec_PartionSet">
+      <EndProperty Name="bec_User">
+        <ScalarProperty Name="Id" ColumnName="bec_User_Id" />
+      </EndProperty>
+      <EndProperty Name="bec_Partion">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="bec_User_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
