@@ -11,7 +11,7 @@ namespace BeckMan.Business.Services
     /// <summary>
     /// 经销商评估信息服务
     /// </summary>
-    public class AssInfomationService
+    public class AssInfomationService : IDataOper<bec_AssInformation>
     {
         BeckManEntities dbContext;
         public AssInfomationService()
@@ -19,27 +19,39 @@ namespace BeckMan.Business.Services
             dbContext = new BeckManEntities();
         }
 
-        public void Add(bec_AssInformation inforMation, int AearId, int PartionId)
+        public void BachDelete(List<int> ids)
         {
+            throw new NotImplementedException();
+        }
 
-            try
-            {
-                inforMation.bec_Aear = new bec_Aear { Id = AearId };
-                inforMation.bec_Partion = new bec_Partion { Id = PartionId };
-                dbContext.Entry(inforMation.bec_Aear).State = System.Data.Entity.EntityState.Unchanged;
-                dbContext.Entry(inforMation.bec_Partion).State = System.Data.Entity.EntityState.Unchanged;
-                //bec_Aear Aear = dbContext.bec_AearSet.Find(AearId);
-                //bec_Partion partion = dbContext.bec_PartionSet.Find(PartionId);
-                //inforMation.bec_Aear = Aear;
-                //inforMation.bec_Partion = partion;
-                dbContext.bec_AssInformationSet.Add(inforMation);
-                dbContext.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                throw ex;
-            }
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public List<bec_AssInformation> findList(bec_AssInformation filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<bec_AssInformation> findList(bec_AssInformation filter, int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bec_AssInformation Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Save(bec_AssInformation entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(bec_AssInformation entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

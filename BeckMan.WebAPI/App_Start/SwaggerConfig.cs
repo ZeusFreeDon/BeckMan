@@ -74,8 +74,8 @@ namespace BeckMan.WebAPI
                         //    //.TokenUrl("https://tempuri.org/token")
                         //    .Scopes(scopes =>
                         //    {
-                        //        scopes.Add("read", "Read access to protected resources");
-                        //        scopes.Add("write", "Write access to protected resources");
+                        //        scopes.Save("read", "Read access to protected resources");
+                        //        scopes.Save("write", "Write access to protected resources");
                         //    });
 
                         // Set this flag to omit descriptions for any actions decorated with the Obsolete attribute

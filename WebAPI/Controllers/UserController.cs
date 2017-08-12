@@ -29,7 +29,7 @@ namespace BeckMan.WebAPI.Controllers
 
         //public PagingEntity<bec_User> Get(int start, int limit)
         //{
-        //    return new PagingEntity<bec_User> { total = userService.Total(), items = userService.Find(start, limit) };
+        //    return new PagingEntity<bec_User> { total = userService.Total(), items = userService.findList(start, limit) };
         //}
 
         //public PagingEntity<bec_User> Get(string filter, int start, int limit)
@@ -38,7 +38,7 @@ namespace BeckMan.WebAPI.Controllers
         //    {
         //        return Get(start, limit);
         //    }
-        //    return new PagingEntity<bec_User> { total = userService.Total(filter), items = userService.Find(filter, start, limit) };
+        //    return new PagingEntity<bec_User> { total = userService.Total(filter), items = userService.findList(filter, start, limit) };
         //}
 
         // POST: api/Product

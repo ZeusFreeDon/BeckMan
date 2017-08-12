@@ -68,8 +68,8 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Swagger.Net, Version=0.5.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -171,12 +171,14 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\JsonContentNegotiator.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\SwaggerNet.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AearController.cs" />
     <Compile Include="Controllers\AssInfomationController.cs" />
+    <Compile Include="Controllers\ExceptionHelp.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\PartionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -185,7 +187,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApiResult.cs" />
+    <Compile Include="Models\IHttpActionResult.cs" />
     <Compile Include="Models\PagingEntity.cs" />
+    <Compile Include="Models\ResponseResult.cs" />
+    <Compile Include="Models\RestResultGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

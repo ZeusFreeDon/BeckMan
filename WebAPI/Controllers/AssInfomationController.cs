@@ -13,10 +13,8 @@ namespace WebAPI.Controllers
 {
     public class AssInfomationController : ApiController
     {
-        AssInfomationService aService = new AssInfomationService();
-
-        public void Add([FromBody] bec_AssInformation entity) {
-            aService.Add(entity, 1, 1);
+        public void Add([FromBody] bec_AssInformation entity)
+        {
         }
     }
 }

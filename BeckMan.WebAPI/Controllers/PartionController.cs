@@ -27,7 +27,7 @@ namespace BeckMan.WebAPI.Controllers
         /// <returns></returns>
         [Route("api/Partion/pageList")]
         public PagingEntity<bec_Partion> PageList([FromBody]bec_Partion filter, int pageIndex, int pageSize) {
-            List<bec_Partion> lists = pService.Find(filter).Skip(pageIndex).Take(pageSize).ToList();
+            List<bec_Partion> lists = pService.findList(filter).Skip(pageIndex).Take(pageSize).ToList();
             return new PagingEntity<bec_Partion>() { items = lists, total = lists.Count };
         }
 
@@ -38,7 +38,7 @@ namespace BeckMan.WebAPI.Controllers
         /// <returns>是否成功</returns>
         [Route("api/Partion/AddPartion")]
         public void AddPartion([FromBody]bec_Partion entity) {
-            pService.Add(entity);
+            pService.Save(entity);
         }
 
         /// <summary>

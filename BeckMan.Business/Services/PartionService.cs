@@ -11,7 +11,7 @@ namespace BeckMan.Business.Services
     /// <summary>
     /// 分区服务
     /// </summary>
-    public class PartionService
+    public class PartionService : IDataOper<bec_Partion>
     {
         BeckManEntities dbContext;
 
@@ -20,7 +20,7 @@ namespace BeckMan.Business.Services
             dbContext = new BeckManEntities();
         }
 
-        public bool Add(bec_Partion entity)
+        public bool Save(bec_Partion entity)
         {
             dbContext.bec_PartionSet.Add(entity);
             return dbContext.SaveChanges() == 1;
@@ -37,7 +37,7 @@ namespace BeckMan.Business.Services
             return dbContext.bec_PartionSet.Find(Id);
         }
 
-        public List<bec_Partion> Find(bec_Partion filter)
+        public List<bec_Partion> findList(bec_Partion filter)
         {
             Expression<Func<bec_Partion, bool>> express = p => false;
             if (!string.IsNullOrEmpty(filter.PartionName))
@@ -61,5 +61,30 @@ namespace BeckMan.Business.Services
             return dbContext.bec_PartionSet.SingleOrDefault(p => p.PartionID == partionID) != null;
         }
 
+        public List<bec_Partion> findList(bec_Partion filter, int pageIndex, int pageSize)
+        {
+            Expression<Func<bec_Partion, bool>> express = p => false;
+            if (!string.IsNullOrEmpty(filter.PartionName))
+            {
+                express = express.Or(p => p.PartionName.Contains(filter.PartionName));
+            }
+            if (!string.IsNullOrEmpty(filter.PartionID))
+            {
+                express = express.Or(p => p.PartionID.Contains(filter.PartionID));
+            }
+            int skipCount = (pageIndex - 1) * pageSize;
+            return dbContext.bec_PartionSet.Where(express).Skip(skipCount).Take(pageSize).ToList();
+            
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BachDelete(List<int> ids)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
