@@ -15,6 +15,6 @@ namespace BeckMan.Business.impl
         /// 查找Marsdata用户
         /// </summary>
         /// <returns></returns>
-        List<bsc_user> FindMDUsers();
+        //List<bsc_user> FindMDUsers();
     }
 }

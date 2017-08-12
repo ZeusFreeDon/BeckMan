@@ -39,7 +39,7 @@ namespace BeckMan.Business.Services
 
         public List<bec_Partion> Find(bec_Partion filter)
         {
-            var express = ExpressionExt.False<bec_Partion>();
+            Expression<Func<bec_Partion, bool>> express = p => false;
             if (!string.IsNullOrEmpty(filter.PartionName))
             {
                 express = express.Or(p => p.PartionName.Contains(filter.PartionName));
@@ -49,7 +49,6 @@ namespace BeckMan.Business.Services
                 express = express.Or(p => p.PartionID.Contains(filter.PartionID));
             }
             return dbContext.bec_PartionSet.Where(express).ToList();
-            //return dbContext.bec_PartionSet.Where(p => p.PartionID == filter.PartionID && p.PartionName == filter.PartionName).ToList();
         }
 
         /// <summary>
