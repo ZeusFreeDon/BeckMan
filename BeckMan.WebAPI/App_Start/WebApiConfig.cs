@@ -1,4 +1,5 @@
 ﻿using BeckMan.WebAPI.App_Start;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,13 +27,9 @@ namespace BeckMan.WebAPI
             //返回值全部使用json格式
             var jsonFormatter = new JsonMediaTypeFormatter();
             config.Services.Replace(typeof(IContentNegotiator), new JsonContentNegotiator(jsonFormatter));
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling= PreserveReferencesHandling.Objects;
 
-            //Json转换时忽略对象里的null属性
-            GlobalConfiguration.Configuration.Formatters
-                .JsonFormatter.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings()
-                {
-                    NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
-                };
         }
     }
 }

@@ -4,6 +4,7 @@ using BeckMan.Business.impl;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using Newtonsoft.Json;
 
 namespace BeckMan.Business.Services
 {
@@ -19,7 +20,9 @@ namespace BeckMan.Business.Services
 
         public bec_User Get(int id)
         {
-            return DBContext.bec_UserSet.Find(id);
+            var user = DBContext.bec_UserSet.Find(id);
+            user=user.ToJsonResult<bec_User>();
+            return user;
         }
 
         public bec_User Login(string userCode, string pwd) {
@@ -31,17 +34,17 @@ namespace BeckMan.Business.Services
         {
             DBContext.bec_UserSet.Add(user);
             DBContext.SaveChanges();
-            return user;
+            return user.ToJsonResult<bec_User>();
         }
 
         public List<bec_User> Find(int start, int limit)
         {
-            return DBContext.bec_UserSet.OrderBy(p => p.UserName).Skip(start).Take(limit).ToList(); ;
+            return DBContext.bec_UserSet.OrderBy(p => p.UserName).Skip(start).Take(limit).ToList().ToJsonResult<List<bec_User>>();
         }
 
         public List<bec_User> Find(string namefilter, int start, int limit)
         {
-            return DBContext.bec_UserSet.Where(p => p.UserName.Contains(namefilter)).OrderBy(p => p.UserName).Skip(start).Take(limit).ToList(); ;
+            return DBContext.bec_UserSet.Where(p => p.UserName.Contains(namefilter)).OrderBy(p => p.UserName).Skip(start).Take(limit).ToList().ToJsonResult<List<bec_User>>();
         }
 
         public int Total()
@@ -52,6 +55,25 @@ namespace BeckMan.Business.Services
         public int Total(string namefilter)
         {
             return DBContext.bec_RoleSet.Where(p => p.Name.Contains(namefilter)).Count();
+        }
+
+        public void Delete(int id)
+        {
+            using (DbContextTransaction trans = DBContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    string sql = "delete bec_User_Role where UserId=" + id;
+                    DBContext.Database.ExecuteSqlCommand(sql);
+                    sql = "delete bec_UserSet where Id=" + id;
+                    DBContext.Database.ExecuteSqlCommand(sql);
+                    trans.Commit();
+                }
+                catch
+                {
+                    trans.Rollback();
+                }
+            }
         }
 
         public void Delete(List<int> idList)

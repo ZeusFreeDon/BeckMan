@@ -40,22 +40,21 @@ namespace BeckMan.WebAPI.Controllers
             return new PagingEntity<bec_User> { total = userService.Total(filter), items = userService.Find(filter, start, limit) };
         }
 
-        // POST: api/Product
         public bec_User Post([FromBody]bec_User user)
         {
             return userService.Add(user);
         }
 
-        // PUT: api/Product/5
         public void Put(int id, [FromBody]bec_User user)
         {
             userService.Update(user);
         }
 
-        // DELETE: api/Product/5
+ 
         public void Delete(int id)
         {
-            userService.Delete(new List<int> { id });
+            //userService.Delete(new List<int> { id });
+            userService.Delete(id);
         }
 
         [HttpGet]
@@ -75,8 +74,6 @@ namespace BeckMan.WebAPI.Controllers
                 {
                     JProperty menu = json.Property(prop.Name);
                     JObject menu1 = (JObject)json.GetValue(prop.Name);
-
-
                 });
                 return json;
             }

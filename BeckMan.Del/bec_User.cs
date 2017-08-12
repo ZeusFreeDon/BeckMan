@@ -18,6 +18,7 @@ namespace BeckMan.Del
         public bec_User()
         {
             this.bec_PartionSet = new HashSet<bec_Partion>();
+            this.bec_RoleSet = new HashSet<bec_Role>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace BeckMan.Del
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bec_Partion> bec_PartionSet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bec_Role> bec_RoleSet { get; set; }
     }
 }

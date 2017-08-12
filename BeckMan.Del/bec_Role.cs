@@ -14,10 +14,19 @@ namespace BeckMan.Del
     
     public partial class bec_Role
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public bec_Role()
+        {
+            this.bec_UserSet = new HashSet<bec_User>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string Remark { get; set; }
         public string Functions { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bec_User> bec_UserSet { get; set; }
     }
 }
