@@ -17,7 +17,8 @@ namespace BeckMan.Del
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public bec_User()
         {
-            this.bec_Partion = new HashSet<bec_Partion>();
+            this.bec_PartionSet = new HashSet<bec_Partion>();
+            this.bec_RoleSet = new HashSet<bec_Role>();
         }
     
         public int Id { get; set; }
@@ -28,9 +29,10 @@ namespace BeckMan.Del
         public string Activity { get; set; }
         public string UserCode { get; set; }
         public string Password { get; set; }
-        public int MDUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bec_Partion> bec_Partion { get; set; }
+        public virtual ICollection<bec_Partion> bec_PartionSet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bec_Role> bec_RoleSet { get; set; }
     }
 }

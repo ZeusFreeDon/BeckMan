@@ -51,22 +51,22 @@ namespace BeckMan.Business.Services
 
         public List<bec_Role> Find()
         {
-            return DBContext.bec_RoleSet.OrderBy(p => p.Name).ToList(); ;
+            return DBContext.bec_RoleSet.OrderBy(p => p.Name).ToList().ToJsonResult<List<bec_Role>>();
         }
 
         public List<bec_Role> Find(int start, int limit)
         {
-            return DBContext.bec_RoleSet.OrderBy(p => p.Name).Skip(start).Take(limit).ToList(); ;
+            return DBContext.bec_RoleSet.OrderBy(p => p.Name).Skip(start).Take(limit).ToList().ToJsonResult<List<bec_Role>>();
         }
 
         public List<bec_Role> Find(string namefilter, int start, int limit)
         {
-            return DBContext.bec_RoleSet.Where(p => p.Name.Contains(namefilter)).OrderBy(p => p.Name).Skip(start).Take(limit).ToList(); ;
+            return DBContext.bec_RoleSet.Where(p => p.Name.Contains(namefilter)).OrderBy(p => p.Name).Skip(start).Take(limit).ToList().ToJsonResult<List<bec_Role>>();
         }
 
         public bec_Role Get(int id)
         {
-            return DBContext.bec_RoleSet.Find(id);
+            return DBContext.bec_RoleSet.Find(id).ToJsonResult<bec_Role>(); ;
         }
 
         public void Update(bec_Role role)
