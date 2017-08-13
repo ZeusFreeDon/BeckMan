@@ -32,8 +32,14 @@ namespace BeckMan.Del
         public string AYApplication { get; set; }
         public string AYCallCenter { get; set; }
         public string AYOperation { get; set; }
-    
+
         public virtual bec_Partion bec_Partion { get; set; }
         public virtual bec_Aear bec_Aear { get; set; }
+        //public int bec_PartionID;
+        //public int bec_AearID;
+
+        //public IList<bec_Partion> bec_PartionSet;
+        //public IList<bec_Aear> bec_AearSet;
+
     }
 }
