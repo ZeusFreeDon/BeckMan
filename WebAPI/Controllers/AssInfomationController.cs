@@ -77,6 +77,18 @@ namespace WebAPI.Controllers
         {
             return ExceptionHelp.Execute<bool>(() =>
             {
+                BeckManEntities dbContext = new BeckManEntities();
+                bec_AssInformation dbEntity = dbContext.bec_AssInformationSet.Find(entity.Id);
+                if (entity.bec_Aear != null) {
+                    bec_Aear aear = dbContext.bec_AearSet.Find(entity.bec_Aear.Id);
+                    aear.bec_AssInformation.Add(dbEntity);
+                }
+                if(entity.bec_Partion != null)
+                {
+                    bec_Partion partion = dbContext.bec_PartionSet.Find(entity.bec_Partion.Id);
+                    partion.bec_AssInformation.Add(dbEntity);
+                }
+                dbContext.SaveChanges();
                 return dbBase.Update(entity);
             }, Request);
         }
