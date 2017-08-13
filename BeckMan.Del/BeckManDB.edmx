@@ -73,8 +73,8 @@
     <Property Name="AYApplication" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AYCallCenter" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AYOperation" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="bec_Partion_Id" Type="int" Nullable="false" />
-    <Property Name="bec_Aear_Id" Type="int" Nullable="false" />
+    <Property Name="bec_Partion_Id" Type="int" Nullable="true" />
+    <Property Name="bec_Aear_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="bec_ProductSet">
     <Key>
@@ -118,7 +118,7 @@
     <Property Name="bec_UserSet_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="bec_Partionbec_AssInformation">
-    <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="1" />
+    <End Role="bec_Partion" Type="BeckMan.Store.bec_PartionSet" Multiplicity="0..1" />
     <End Role="bec_AssInformation" Type="BeckMan.Store.bec_AssInformationSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="bec_Partion">
@@ -130,7 +130,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="bec_Aearbec_AssInformation">
-    <End Role="bec_Aear" Type="BeckMan.Store.bec_AearSet" Multiplicity="1" />
+    <End Role="bec_Aear" Type="BeckMan.Store.bec_AearSet" Multiplicity="0..1" />
     <End Role="bec_AssInformation" Type="BeckMan.Store.bec_AssInformationSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="bec_Aear">
@@ -250,11 +250,11 @@
           <NavigationProperty Name="bec_Aear" Relationship="BeckMan.bec_Aearbec_AssInformation" FromRole="bec_AssInformation" ToRole="bec_Aear" />
         </EntityType>
         <Association Name="bec_Partionbec_AssInformation">
-          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="1" />
+          <End Type="BeckMan.bec_Partion" Role="bec_Partion" Multiplicity="0..1" />
           <End Type="BeckMan.bec_AssInformation" Role="bec_AssInformation" Multiplicity="*" />
         </Association>
         <Association Name="bec_Aearbec_AssInformation">
-          <End Type="BeckMan.bec_Aear" Role="bec_Aear" Multiplicity="1" />
+          <End Type="BeckMan.bec_Aear" Role="bec_Aear" Multiplicity="0..1" />
           <End Type="BeckMan.bec_AssInformation" Role="bec_AssInformation" Multiplicity="*" />
         </Association>
         <EntityType Name="bec_Product">
@@ -392,6 +392,7 @@
       <EndProperty Name="bec_AssInformation">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="bec_Partion_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="bec_Aearbec_AssInformation" TypeName="BeckMan.bec_Aearbec_AssInformation" StoreEntitySet="bec_AssInformationSet">
       <EndProperty Name="bec_Aear">
@@ -400,6 +401,7 @@
       <EndProperty Name="bec_AssInformation">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="bec_Aear_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="bec_User_Role" TypeName="BeckMan.bec_User_Role" StoreEntitySet="bec_User_Role">
       <EndProperty Name="bec_RoleSet">

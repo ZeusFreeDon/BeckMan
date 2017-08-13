@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/12/2017 19:07:31
+-- Date Created: 08/13/2017 11:16:26
 -- Generated from EDMX file: F:\work\甲方资料\B部项目\BeckMan\BeckMan.Del\BeckManDB.edmx
 -- --------------------------------------------------
 
@@ -28,6 +28,9 @@ IF OBJECT_ID(N'[dbo].[FK_bec_User_Role_bec_RoleSet]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_bec_User_Role_bec_UserSet]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[bec_User_Role] DROP CONSTRAINT [FK_bec_User_Role_bec_UserSet];
+GO
+IF OBJECT_ID(N'[dbo].[FK_bec_Userbec_Partion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[bec_PartionSet] DROP CONSTRAINT [FK_bec_Userbec_Partion];
 GO
 
 -- --------------------------------------------------
@@ -97,8 +100,8 @@ CREATE TABLE [dbo].[bec_AssInformationSet] (
     [AYApplication] nvarchar(max)  NOT NULL,
     [AYCallCenter] nvarchar(max)  NOT NULL,
     [AYOperation] nvarchar(max)  NOT NULL,
-    [bec_Partion_Id] int  NOT NULL,
-    [bec_Aear_Id] int  NOT NULL
+    [bec_Partion_Id] int  NULL,
+    [bec_Aear_Id] int  NULL
 );
 GO
 
