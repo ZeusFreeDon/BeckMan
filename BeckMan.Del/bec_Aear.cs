@@ -17,19 +17,14 @@ namespace BeckMan.Del
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public bec_Aear()
         {
-            this._bec_AssInformation = new HashSet<bec_AssInformation>();
+            this.bec_AssInformation = new HashSet<bec_AssInformation>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Remak { get; set; }
-
-        [NonSerialized]
-        private ICollection<bec_AssInformation> _bec_AssInformation;
-
-        public virtual ICollection<bec_AssInformation> bec_AssInformation {
-            get { return _bec_AssInformation; }
-            set { _bec_AssInformation = value; }
-        }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bec_AssInformation> bec_AssInformation { get; set; }
     }
 }
